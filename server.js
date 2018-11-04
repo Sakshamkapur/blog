@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var users = express.Router();
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 const saltRounds = 5;
 var jwt = require('jsonwebtoken');
 var token;
