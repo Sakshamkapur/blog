@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create Blog</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/create.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/common.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+	<% include partials/sidebar.ejs %>
+ 	<div class="card">
+ 		<h4>Create a Blog</h4>
+ 		<form>
+	 		<label>Title :</label>
+	 		<article class="tags-bar">
+	 		<input type="text" class="title" name="title" placeholder="Add Title">
+	 		</article>
+	 		<hr>
+	 		<label>Tags : </label>
+	 		<article class="tags-bar">
+		 		<div class="tags">
+		          <input type="text" class="tags" value="" placeholder="Add Tags (Add , To seperate)" />
+		        </div>
+	        </article>
+	 		<hr>
+	 		<label>Content : </label>
+	 		<article class="tags-bar">
+	 		<textarea class="cont" name="cont" placeholder="Add Content"></textarea>
+	 		</article>
+	 		<hr>
+	 		<button type="button" class="btn btn-default" id="submit">Publish</button>
+ 		</form>
+ 	</div>
+</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./assets/js/create.js"></script>
+</html>

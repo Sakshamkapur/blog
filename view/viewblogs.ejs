@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View Blogs</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/view.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/common.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<% include partials/sidebar.ejs %>
+	<form class="search">
+	  <input class="searchTerm" placeholder="Filter with # tags,title,content etc" /><input class="searchButton" type="submit" />
+	</form>
+	<div class="wrapper">
+    		<% for(var i=0;i< row.length; i++){ %> 
+    		
+    		<div class="modal fade" id="myModal<%= i+1 %>" role="dialog">
+	            <div class="modal-dialog modal-lg">
+	              <div class="modal-content">
+	                <div class="modal-header">
+	                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                  <h4 class="modal-title"><%= row[i].title %></h4>
+	                </div>
+	                <div class="modal-body">
+	                	<label>Title :</label>
+				 		<article class="tags-bar">
+				 		<input type="text" class="title" value="<%= row[i].title %>" name="title" placeholder="Add Title">
+				 		</article>
+				 		<hr>
+				 		<label>Tags : </label>
+				 		<article class="tags-bar">
+					 		<div class="tags">
+					 		  <% tg = row[i].tags.split(",") %>
+					 		  <% for(j=0;j<tg.length;j++){%>
+					 		   <span id="<%= row[i].id %>" class="tag"><%= tg[j] %></span>
+					 		  <%}%>
+					          <input type="text" class="tags" placeholder="Add Tags (Add , To seperate)" />
+					        </div>
+				        </article>
+				 		<hr>
+				 		<label>Content : </label>
+				 		<article class="tags-bar">
+				 		<textarea class="cont" name="cont" placeholder="Add Content"><%= row[i].content %></textarea>
+				 		</article>	
+				 		<hr>  
+				 		<h4>Comments</h4>
+				 		<hr>
+				 		<% if(row[i].comments.length != 0){%>
+				 		<% for(k=0;k<row[i].comments.length;k++){ %>
+				 		<div class="cmt"><%= row[i].comments[k].commented_by %> : <%= row[i].comments[k].text %>
+				 		<% if(row[i].comments[k].commented_by == auth[0].email){ %>
+				 			<div class="cross" id="<%= row[i].id %>#<%= row[i].comments[k].id %>"><i class="fas fa-times"></i></div>
+				 		<%}%>
+				 		</div>
+				 		<hr>
+				 		<% }} %>
+				 		<article class="tags-bar">
+				 		<textarea class="comment" id="" name="comm" placeholder="Enter Comment"></textarea>
+				 		<button type="button" id="addcmt<%= i+1 %>" name="<%= row[i].id %>" class="btn btn-default">Add comment</button>
+				 		</article>	               
+	                </div>
+	                <div class="modal-footer">
+	                  <% if(row[i].by == auth[0].email){%>
+	                  <button type="button" id="<%= row[i].id %>" class="btn btn-primary edit">Edit</button>
+	                  <%}%>
+	                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                </div>
+	              </div>
+	            </div>
+	        </div>
+
+
+    		<div class="card radius shadowDepth1 crclick" data-toggle="modal" data-target="#myModal<%= i+1 %>">
+    			<div class="card__image border-tlr-radius">
+                </div>
+
+    			<div class="card__content card__padding">
+                    <div class="card__share">
+                        <div class="card__social">
+                         	<% if(row[i].by == auth[0].email){%>
+                        	<a id=<%= row[i].id %> class="delete-icon" href="#"><i class="fas fa-times"></i></a>
+                        	<%}%>
+                            <a class="share-icon twitter twt" href="https://twitter.com/home?status=Take%20a%20look%20at%20this%20amazing%20blog!%0A%0ATitle%3A%20<%= row[i].title %>%0A%0AContent%3A%20<%= row[i].content %>" target="_blank"><i class="fab fa-twitter"></i></a>
+                        </div>
+
+                        <a id="share" class="share-toggle share-icon" href="#"></a>
+                    </div>
+
+    				<div class="card__meta">
+    					<a href="#" class="tgs"><%= row[i].tags %></a>
+                        <time><%= row[i].created_on %></time>
+    				</div>
+
+    				<article class="card__article">
+	    				<h2><%= row[i].title %></h2>
+
+	    				<p><%= row[i].content %></p>
+	    			</article>
+    			</div>
+
+    			<div class="card__action">
+    				
+    				<div class="card__author">
+    					<div class="card__author-content">
+    						By <a href="#"><%= row[i].by %></a>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    		<%}%>
+    	</div>
+</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+
+	<script type="text/javascript" src="./assets/js/view.js"></script>
+</html>
